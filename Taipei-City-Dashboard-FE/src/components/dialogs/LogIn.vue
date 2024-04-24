@@ -13,6 +13,7 @@ const {
 	VITE_TAIPEIPASS_URL,
 	VITE_TAIPEIPASS_CLIENT_ID,
 	VITE_TAIPEIPASS_SCOPE,
+	BASE_URL,
 } = import.meta.env;
 
 const dialogStore = useDialogStore();
