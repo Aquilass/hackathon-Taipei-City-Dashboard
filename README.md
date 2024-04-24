@@ -3,10 +3,9 @@
 
 # hackerdog hackathon project
 live view link
-FE: https://backtestdog.ddns.net/hackathon/
-BE: https://backtestdog.ddns.net/api/v1/
-DB: https://backtestdog.ddns.net/hackathon/pgadmin/
-
+FE: [link](https://backtestdog.ddns.net/hackathon/)
+BE: [link](https://backtestdog.ddns.net/hackathon/api)
+DB: [link](https://backtestdog.ddns.net/hackathon/db)
 ## Project setup
 username & password in .env file
 
