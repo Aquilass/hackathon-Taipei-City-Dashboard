@@ -1,0 +1,22 @@
+name: hackathon deploy dev
+
+on:
+  push:
+    branches: [ "dev" ]
+  # pull_request:
+  #   branches: [ "dev" ]
+
+jobs:
+
+  build:
+
+    runs-on: hackathon
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: pull & build latest
+      run: docker-compose -f docker-compose.dev.yml up --build -d
+    - name: Switch to Docker directory
+      run: cd docker
+    - name: run docker-compose
+      run: docker-compose up -d
