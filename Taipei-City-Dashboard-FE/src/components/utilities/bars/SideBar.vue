@@ -86,7 +86,7 @@ onMounted(() => {
         :expanded="isExpanded"
       />
     </div>
-    <h2>{{ isExpanded ? `公共儀表板 ` : `公共` }}</h2>
+    <h2>{{ isExpanded ? `公共儀表板板 ` : `公共` }}</h2>
     <SideBarTab
       v-for="item in contentStore.publicDashboards.filter(
         (item) => item.index !== 'map-layers'
