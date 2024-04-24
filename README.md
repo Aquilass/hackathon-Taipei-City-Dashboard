@@ -1,5 +1,19 @@
 # <img src='Taipei-City-Dashboard-FE/src/assets/images/TUIC.svg' height='28'> Taipei City Dashboard
 
+
+# hackerdog setup
+live view link
+FE: https://backtestdog.ddns.net/hackathon/
+BE: https://backtestdog.ddns.net/api/v1/
+DB: https://backtestdog.ddns.net/hackathon/pgadmin/
+
+#### useful link:
+project setup: [setup guide](https://tuic.gov.taipei/documentation/front-end/project-setup)
+
+
+
+
+
 ## Introduction
 
 Taipei City Dashboard is a data visualization platform developed by [Taipei Urban Intelligence Center (TUIC)](https://tuic.gov.taipei/en).
