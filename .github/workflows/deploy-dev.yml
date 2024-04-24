@@ -10,13 +10,10 @@ jobs:
 
   build:
 
-    runs-on: hackathon
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v3
-    - name: pull & build latest
-      run: docker-compose -f docker-compose.dev.yml up --build -d
-    - name: Switch to Docker directory
-      run: cd docker
     - name: run docker-compose
+    - working-directory: ./docker
       run: docker-compose up -d
