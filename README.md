@@ -1,11 +1,18 @@
 # <img src='Taipei-City-Dashboard-FE/src/assets/images/TUIC.svg' height='28'> Taipei City Dashboard
 
 
-# hackerdog setup
+# hackerdog hackathon project
 live view link
 FE: https://backtestdog.ddns.net/hackathon/
 BE: https://backtestdog.ddns.net/api/v1/
 DB: https://backtestdog.ddns.net/hackathon/pgadmin/
+
+## Project setup
+username & password in .env file
+
+### development
+Pull requests on dev branch will auto deploy changes of FE & BE
+
 
 #### useful link:
 project setup: [setup guide](https://tuic.gov.taipei/documentation/front-end/project-setup)
