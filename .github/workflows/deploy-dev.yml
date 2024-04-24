@@ -14,6 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: run docker-compose
+    - name: run docker-compose init FE & BE
       working-directory: ./docker
+      run: docker-compose -f docker-compose-init.yaml up -d
+    - name: run docker-compose recreate FE & BE
+      working-directory: ./docker    
       run: docker-compose up -d
