@@ -6,6 +6,13 @@ live view link
 FE: [link](https://backtestdog.ddns.net/hackathon/)
 BE: [link](https://backtestdog.ddns.net/hackathon/api)
 DB: [link](https://backtestdog.ddns.net/hackathon/db)
+
+local develop url:
+FE: http://localhost:8080/hackathon/dashboard
+BE: http://localhost:8088/api/v1
+DB: http://localhost:8889/hackathon/pgadmin/
+
+
 ## Project setup
 username & password in .env file
 
