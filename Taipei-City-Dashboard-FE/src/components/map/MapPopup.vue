@@ -30,17 +30,14 @@
 		</div>
 		<div class="mappopup-content">
 			<div v-for="item in mapConfigs[activeTab].property" :key="item.key">
-				<h3 v-if="item.key !== '攝影機路徑'">{{ item.name }}</h3>
-				<div :style="{ display: 'inline-block' }">
-					<p v-if="item.key !== '攝影機路徑'">
-						{{ popupContent[activeTab].properties[item.key] }}
-					</p>
-				</div>
+				<h3>{{ item.name }}</h3>
+				<p>{{ popupContent[activeTab]?.properties[item.key] }}</p>
 			</div>
 		</div>
-		<div class="mappopup-content">
+		<!-- 攝影機影像 -->
+		<!-- <div class="mappopup-content">
 			<img :src="url" width="100%" height="100%" />
-		</div>
+		</div> -->
 	</div>
 </template>
 

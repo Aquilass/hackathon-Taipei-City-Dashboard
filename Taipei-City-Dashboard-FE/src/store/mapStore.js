@@ -82,7 +82,7 @@ export const useMapStore = defineStore("map", {
 				})
 				.on("idle", () => {
 					this.loadingLayers = this.loadingLayers.filter(
-						(el) => el !== "rendering"
+						(el) => el !== "rendering",
 					);
 				});
 		},
@@ -621,9 +621,8 @@ export const useMapStore = defineStore("map", {
 				.setHTML('<div id="vue-popup-content"></div>')
 				.addTo(this.map);
 
-			const str = parsedPopupContent[0].properties.攝影機路徑;
-			const a = str?.substring(str.length - 3);
-			const url = `https://cctv.bote.gov.taipei:8501/MJPEG/${a}`;
+			// parsedPopupContent 會是舊的資料
+			console.log(mapConfigs, parsedPopupContent, "mapConfigs");
 
 			const PopupComponent = defineComponent({
 				extends: MapPopup,
@@ -633,10 +632,6 @@ export const useMapStore = defineStore("map", {
 						popupContent: parsedPopupContent,
 						mapConfigs: mapConfigs,
 						activeTab: ref(0),
-						isVideo: Boolean(
-							parsedPopupContent[0].properties.攝影機路徑,
-						),
-						url: url ? url : "",
 					};
 				},
 			});
