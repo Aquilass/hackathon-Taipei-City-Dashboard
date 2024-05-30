@@ -39,6 +39,7 @@
 			class="mappopup-content"
 		>
 			<img
+				class="mappopup-video"
 				:src="popupContent[activeTab]?.properties.videoUrl"
 				width="100%"
 				height="100%"
@@ -159,11 +160,11 @@
 		p {
 			text-align: justify;
 		}
+	}
 
-		&-cctv {
-			margin-top: 5px;
-			border-radius: 5px;
-		}
+	&-video {
+		margin-top: 5px;
+		border-radius: 5px;
 	}
 }
 </style>
