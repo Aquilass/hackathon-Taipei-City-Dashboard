@@ -30,43 +30,20 @@
 		</div>
 		<div class="mappopup-content">
 			<div v-for="item in mapConfigs[activeTab].property" :key="item.key">
-				<template v-if="item.mode !== 'video'">
-					<h3>{{ item.name }}</h3>
-					<p>
-						{{ popupContent[activeTab]?.properties[item.key] }}
-					</p>
-				</template>
-				<template v-else-if="item.mode === 'video'">
-					<h3 v-if="item.name !== '攝影機路徑'">{{ item.name }}</h3>
-					<p v-if="item.name !== '攝影機路徑'">
-						{{ popupContent[activeTab]?.properties[item.key] }}
-					</p>
-					<img
-						v-else
-						class="mappopup-content-cctv"
-						:src="isPropVideo"
-						width="100%"
-						height="100%"
-					/>
-				</template>
+				<h3>{{ item.name }}</h3>
+				<p>{{ popupContent[activeTab]?.properties[item.key] }}</p>
 			</div>
 		</div>
-		<!-- 簡單判斷的版本 -->
-		<!-- <div class="mappopup-content">
-			<div v-for="item in mapConfigs[activeTab].property" :key="item.key">
-				<h3 v-if="item.name !== '攝影機路徑'">{{ item.name }}</h3>
-				<p v-if="item.name !== '攝影機路徑'">
-					{{ popupContent[activeTab]?.properties[item.key] }}
-				</p>
-				<p v-else>
-					<img
-						:src="popupContent[activeTab]?.properties[item.key]"
-						width="100%"
-						height="100%"
-					/>
-				</p>
-			</div>
-		</div> -->
+		<div
+			v-if="popupContent[activeTab]?.properties.攝影機路徑"
+			class="mappopup-content"
+		>
+			<img
+				:src="popupContent[activeTab]?.properties.攝影機路徑"
+				width="100%"
+				height="100%"
+			/>
+		</div>
 	</div>
 </template>
 
@@ -151,7 +128,9 @@
 			color: var(--color-complement-text);
 			font-size: var(--font-s);
 			text-align: center;
-			transition: color 0.2s, opacity 0.2s;
+			transition:
+				color 0.2s,
+				opacity 0.2s;
 			user-select: none;
 
 			&:hover {
