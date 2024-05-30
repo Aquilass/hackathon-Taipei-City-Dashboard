@@ -30,20 +30,28 @@
 		</div>
 		<div class="mappopup-content">
 			<div v-for="item in mapConfigs[activeTab].property" :key="item.key">
-				<h3>{{ item.name }}</h3>
-				<p>{{ popupContent[activeTab]?.properties[item.key] }}</p>
+				<div v-if="item.mode === 'video'" class="mappopup-content">
+					<div v-if="item.key === 'videoUrl'">
+						<img
+							v-if="popupContent[activeTab]?.properties.videoUrl"
+							class="mappopup-video"
+							:src="popupContent[activeTab]?.properties.videoUrl"
+							width="100%"
+							height="100%"
+						/>
+					</div>
+					<div v-else>
+						<h3>{{ item.name }}</h3>
+						<p>
+							{{ popupContent[activeTab]?.properties[item.key] }}
+						</p>
+					</div>
+				</div>
+				<div v-else>
+					<h3>{{ item.name }}</h3>
+					<p>{{ popupContent[activeTab]?.properties[item.key] }}</p>
+				</div>
 			</div>
-		</div>
-		<div
-			v-if="popupContent[activeTab]?.properties.videoUrl"
-			class="mappopup-content"
-		>
-			<img
-				class="mappopup-video"
-				:src="popupContent[activeTab]?.properties.videoUrl"
-				width="100%"
-				height="100%"
-			/>
 		</div>
 	</div>
 </template>
@@ -61,7 +69,7 @@
 
 .mapboxgl-popup {
 	width: fit-content;
-	min-width: 310px;
+	min-width: 310px !important;
 	animation: easein 0.2s linear;
 }
 
