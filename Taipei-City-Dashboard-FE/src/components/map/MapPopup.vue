@@ -35,11 +35,11 @@
 			</div>
 		</div>
 		<div
-			v-if="popupContent[activeTab]?.properties.攝影機路徑"
+			v-if="popupContent[activeTab]?.properties.videoUrl"
 			class="mappopup-content"
 		>
 			<img
-				:src="popupContent[activeTab]?.properties.攝影機路徑"
+				:src="popupContent[activeTab]?.properties.videoUrl"
 				width="100%"
 				height="100%"
 			/>
