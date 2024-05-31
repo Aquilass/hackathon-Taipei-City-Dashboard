@@ -82,7 +82,7 @@ export const useMapStore = defineStore("map", {
 				})
 				.on("idle", () => {
 					this.loadingLayers = this.loadingLayers.filter(
-						(el) => el !== "rendering"
+						(el) => el !== "rendering",
 					);
 				});
 		},
@@ -92,7 +92,7 @@ export const useMapStore = defineStore("map", {
 			const authStore = useAuthStore();
 			if (!this.map) return;
 			// Taipei District Labels
-			fetch(`/mapData/taipei_town.geojson`)
+			fetch(`/hackathon/mapData/taipei_town.geojson`)
 				.then((response) => response.json())
 				.then((data) => {
 					this.map
@@ -103,7 +103,7 @@ export const useMapStore = defineStore("map", {
 						.addLayer(TaipeiTown);
 				});
 			// Taipei Village Labels
-			fetch(`/mapData/taipei_village.geojson`)
+			fetch(`/hackathon/mapData/taipei_village.geojson`)
 				.then((response) => response.json())
 				.then((data) => {
 					this.map
@@ -163,7 +163,7 @@ export const useMapStore = defineStore("map", {
 					(error, image) => {
 						if (error) throw error;
 						this.map.addImage(element, image);
-					}
+					},
 				);
 			});
 		},
@@ -173,7 +173,7 @@ export const useMapStore = defineStore("map", {
 				this.map.setLayoutProperty(
 					"tp_district",
 					"visibility",
-					"visible"
+					"visible",
 				);
 			} else {
 				this.map.setLayoutProperty("tp_district", "visibility", "none");
@@ -186,7 +186,7 @@ export const useMapStore = defineStore("map", {
 				this.map.setLayoutProperty(
 					"tp_village",
 					"visibility",
-					"visible"
+					"visible",
 				);
 			} else {
 				this.map.setLayoutProperty("tp_village", "visibility", "none");
@@ -206,7 +206,7 @@ export const useMapStore = defineStore("map", {
 					this.turnOnMapLayerVisibility(mapLayerId);
 					if (
 						!this.currentVisibleLayers.find(
-							(element) => element === mapLayerId
+							(element) => element === mapLayerId,
 						)
 					) {
 						this.currentVisibleLayers.push(mapLayerId);
@@ -227,7 +227,7 @@ export const useMapStore = defineStore("map", {
 		// 2. Call an API to get the layer data
 		fetchLocalGeoJson(map_config) {
 			axios
-				.get(`/mapData/${map_config.index}.geojson`)
+				.get(`/hackathon/mapData/${map_config.index}.geojson`)
 				.then((rs) => {
 					this.addGeojsonSource(map_config, rs.data);
 				})
@@ -315,7 +315,7 @@ export const useMapStore = defineStore("map", {
 			this.mapConfigs[map_config.layerId] = map_config;
 			this.currentVisibleLayers.push(map_config.layerId);
 			this.loadingLayers = this.loadingLayers.filter(
-				(el) => el !== map_config.layerId
+				(el) => el !== map_config.layerId,
 			);
 		},
 		// 4-2. Add Map Layer for Arc Maps
@@ -356,7 +356,7 @@ export const useMapStore = defineStore("map", {
 			const tb = (window.tb = new Threebox(
 				this.map,
 				this.map.getCanvas().getContext("webgl"), //get the context from the map canvas
-				{ defaultLights: true }
+				{ defaultLights: true },
 			));
 
 			const delay = authStore.isMobileDevice ? 2000 : 500;
@@ -375,7 +375,7 @@ export const useMapStore = defineStore("map", {
 							paintSettings["arc-color"][1]
 								? paintSettings["arc-color"][1]
 								: paintSettings["arc-color"][0],
-							arcInterval + 1
+							arcInterval + 1,
 						);
 						for (let line of lines) {
 							let lineOptions = {
@@ -406,7 +406,7 @@ export const useMapStore = defineStore("map", {
 				this.mapConfigs[map_config.layerId] = map_config;
 				this.currentVisibleLayers.push(map_config.layerId);
 				this.loadingLayers = this.loadingLayers.filter(
-					(el) => el !== map_config.layerId
+					(el) => el !== map_config.layerId,
 				);
 			}, delay);
 		},
@@ -426,7 +426,7 @@ export const useMapStore = defineStore("map", {
 
 			// Get coordnates alone
 			let coords = features.map(
-				(location) => location.geometry.coordinates
+				(location) => location.geometry.coordinates,
 			);
 
 			// Remove duplicate coordinates (so that they wont't cause problems in the Voronoi algorithm...)
@@ -545,7 +545,7 @@ export const useMapStore = defineStore("map", {
 							properties: { value: isoValue },
 							geometry: { type: "LineString", coordinates: line },
 						};
-					})
+					}),
 				);
 			}
 
@@ -570,7 +570,7 @@ export const useMapStore = defineStore("map", {
 			map_config.forEach((element) => {
 				let mapLayerId = `${element.index}-${element.type}`;
 				this.loadingLayers = this.loadingLayers.filter(
-					(el) => el !== mapLayerId
+					(el) => el !== mapLayerId,
 				);
 
 				if (this.map.getLayer(mapLayerId)) {
@@ -578,11 +578,11 @@ export const useMapStore = defineStore("map", {
 					this.map.setLayoutProperty(
 						mapLayerId,
 						"visibility",
-						"none"
+						"none",
 					);
 				}
 				this.currentVisibleLayers = this.currentVisibleLayers.filter(
-					(element) => element !== mapLayerId
+					(element) => element !== mapLayerId,
 				);
 			});
 			this.removePopup();
@@ -596,8 +596,9 @@ export const useMapStore = defineStore("map", {
 				event.point,
 				{
 					layers: this.currentVisibleLayers,
-				}
+				},
 			);
+
 			// Return if there is no info in the click
 			if (!clickFeatureDatas || clickFeatureDatas.length === 0) {
 				return;
@@ -620,11 +621,11 @@ export const useMapStore = defineStore("map", {
 				.setLngLat(event.lngLat)
 				.setHTML('<div id="vue-popup-content"></div>')
 				.addTo(this.map);
-			// Mount a vue component (MapPopup) to the id "vue-popup-content" and pass in data
+
 			const PopupComponent = defineComponent({
 				extends: MapPopup,
 				setup() {
-					// Only show the data of the topmost layer
+					// Only show t	he data of the topmost layer
 					return {
 						popupContent: parsedPopupContent,
 						mapConfigs: mapConfigs,
@@ -702,7 +703,7 @@ export const useMapStore = defineStore("map", {
 					this.map.setLayoutProperty(
 						mapLayerId,
 						"visibility",
-						"none"
+						"none",
 					);
 					// Remove any existing filtered layer
 					if (this.map.getLayer(`${mapLayerId}-filtered`)) {
@@ -716,14 +717,14 @@ export const useMapStore = defineStore("map", {
 						toBeFiltered.features = toBeFiltered.features.filter(
 							(el) =>
 								el.properties[map_filter.byParam.xParam] ===
-								xParam
+								xParam,
 						);
 					}
 					if (yParam) {
 						toBeFiltered.features = toBeFiltered.features.filter(
 							(el) =>
 								el.properties[map_filter.byParam.yParam] ===
-								yParam
+								yParam,
 						);
 					}
 					map_config.layerId = `${mapLayerId}-filtered`;
@@ -776,13 +777,13 @@ export const useMapStore = defineStore("map", {
 					this.map.setLayoutProperty(
 						mapLayerId,
 						"visibility",
-						"none"
+						"none",
 					);
 				} else {
 					this.map.setLayoutProperty(
 						mapLayerId,
 						"visibility",
-						"visible"
+						"visible",
 					);
 				}
 			});
@@ -800,16 +801,16 @@ export const useMapStore = defineStore("map", {
 						this.map.removeLayer(`${mapLayerId}-filtered`);
 					}
 					this.currentLayers = this.currentLayers.filter(
-						(item) => item !== `${mapLayerId}-filtered`
+						(item) => item !== `${mapLayerId}-filtered`,
 					);
 					this.currentVisibleLayers =
 						this.currentVisibleLayers.filter(
-							(item) => item !== `${mapLayerId}-filtered`
+							(item) => item !== `${mapLayerId}-filtered`,
 						);
 					this.map.setLayoutProperty(
 						mapLayerId,
 						"visibility",
-						"visible"
+						"visible",
 					);
 					return;
 				}
