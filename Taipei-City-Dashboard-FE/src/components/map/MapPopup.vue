@@ -30,10 +30,9 @@
 		</div>
 		<div class="mappopup-content">
 			<div v-for="item in mapConfigs[activeTab].property" :key="item.key">
-				<div v-if="item.mode === 'video'" class="mappopup-content">
+				<div v-if="item.mode === 'video'">
 					<div v-if="item.key === 'videoUrl'">
 						<img
-							v-if="popupContent[activeTab]?.properties.videoUrl"
 							class="mappopup-video"
 							:src="popupContent[activeTab]?.properties.videoUrl"
 							width="100%"
